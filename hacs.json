@@ -1,6 +1,5 @@
 {
     "name": "Bayrol",
     "homeassistant": "2025.1.0",
-    "render_readme": true,
-    "zip_release": true
+    "render_readme": true
   }
