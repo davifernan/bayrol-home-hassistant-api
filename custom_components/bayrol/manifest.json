@@ -2,6 +2,7 @@
   "domain": "bayrol",
   "name": "Bayrol",
   "documentation": "https://www.home-assistant.io/integrations/bayrol",
+  "issue_tracker": "https://github.com/4469726b0a/bayrol-home-hassistant/issues",
   "dependencies": [],
   "codeowners": ["@QuantumHome"],
   "requirements": ["paho-mqtt", "aiohttp"],
