@@ -73,7 +73,7 @@ SENSOR_TYPES = {
         "name": "pH Target",
         "device_class": SensorDeviceClass.PH,
         "state_class": SensorStateClass.MEASUREMENT,
-        "coefficient": 1,
+        "coefficient": 10,
         "unit_of_measurement": None,
     },
     "4.26": {
