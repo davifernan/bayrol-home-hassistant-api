@@ -1,12 +1,12 @@
 {
   "domain": "bayrol",
   "name": "Bayrol",
-  "documentation": "https://github.com/4469726b0a/bayrol-home-hassistant",
-  "issue_tracker": "https://github.com/4469726b0a/bayrol-home-hassistant/issues",
-  "dependencies": [],
   "codeowners": ["@QuantumHome"],
-  "requirements": ["paho-mqtt", "aiohttp"],
-  "version": "0.1.0",
   "config_flow": true,
-  "iot_class": "cloud_polling"
+  "dependencies": [],
+  "documentation": "https://github.com/4469726b0a/bayrol-home-hassistant",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/4469726b0a/bayrol-home-hassistant/issues",
+  "requirements": ["paho-mqtt", "aiohttp"],
+  "version": "0.1.0"
 }
