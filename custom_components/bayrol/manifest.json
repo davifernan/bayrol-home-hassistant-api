@@ -4,9 +4,9 @@
   "codeowners": ["@QuantumHome"],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/4469726b0a/bayrol-home-hassistant",
+  "documentation": "https://github.com/0xQuantumHome/bayrol-home-hassistant",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/4469726b0a/bayrol-home-hassistant/issues",
+  "issue_tracker": "https://github.com/0xQuantumHome/bayrol-home-hassistant/issues",
   "requirements": ["paho-mqtt", "aiohttp"],
   "version": "0.1.1"
 }
