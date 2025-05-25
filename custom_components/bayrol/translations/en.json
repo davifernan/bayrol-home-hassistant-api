@@ -1,0 +1,14 @@
+{
+  "config": {
+    "flow_title": "Bayrol",
+    "step": {
+      "user": {
+        "title": "Connect to Bayrol",
+        "description": "Please enter your Bayrol App Link Code.",
+        "data": {
+          "bayrol_app_link_code": "App Link Code (A-******)"
+        }
+      }
+    }
+  }
+}

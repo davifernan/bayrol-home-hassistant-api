@@ -1,0 +1,12 @@
+{
+  "domain": "bayrol",
+  "name": "Bayrol",
+  "documentation": "https://www.home-assistant.io/integrations/bayrol",
+  "dependencies": [],
+  "codeowners": ["@QuantumHome"],
+  "requirements": ["paho-mqtt", "aiohttp"],
+  "version": "0.1.0",
+  "config_flow": true,
+  "iot_class": "cloud_polling",
+  "license": "MIT"
+}

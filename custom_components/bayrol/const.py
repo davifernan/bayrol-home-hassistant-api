@@ -1,0 +1,226 @@
+"""Constants for the Bayrol integration."""
+
+from homeassistant.components.sensor import (
+    SensorDeviceClass,
+    SensorStateClass,
+)
+
+DOMAIN = "bayrol"
+BAYROL_ACCESS_TOKEN = "bayrol_access_token"
+BAYROL_DEVICE_ID = "bayrol_device_id"
+BAYROL_APP_LINK_CODE = "bayrol_app_link_code"
+BAYROL_HOST = "www.bayrol-poolaccess.de"
+BAYROL_PORT = 8083
+
+SENSOR_TYPES = {
+    "4.100": {
+        "name": "Salt",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 10,
+        "unit_of_measurement": "g/l",
+    },
+    "4.102": {
+        "name": "Conductivity",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 10,
+        "unit_of_measurement": "mS/cm",
+    },
+    "4.104": {
+        "name": "Electrolyzer voltage",
+        "device_class": SensorDeviceClass.VOLTAGE,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 10,
+        "unit_of_measurement": "V",
+    },
+    "4.105": {
+        "name": "Electrolyzer current",
+        "device_class": SensorDeviceClass.CURRENT,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 10,
+        "unit_of_measurement": "A",
+    },
+    "4.107": {
+        "name": "Battery voltage",
+        "device_class": SensorDeviceClass.VOLTAGE,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 100,
+        "unit_of_measurement": "V",
+    },
+    "4.112": {
+        "name": "Time before next polarity reversal",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "s",
+    },
+    "4.119": {
+        "name": "Time since polarity reversal",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "s",
+    },
+    "4.182": {
+        "name": "pH",
+        "device_class": SensorDeviceClass.PH,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 10,
+        "unit_of_measurement": None,
+    },
+    "4.2": {
+        "name": "pH Target",
+        "device_class": SensorDeviceClass.PH,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": None,
+    },
+    "4.26": {
+        "name": "Redox Alert Max",
+        "device_class": SensorDeviceClass.VOLTAGE,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "mV",
+    },
+    "4.27": {
+        "name": "Redox Alert Min",
+        "device_class": SensorDeviceClass.VOLTAGE,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "mV",
+    },
+    "4.28": {
+        "name": "Redox Target",
+        "device_class": SensorDeviceClass.VOLTAGE,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "mV",
+    },
+    "4.3": {
+        "name": "pH Alert Max",
+        "device_class": SensorDeviceClass.PH,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 10,
+        "unit_of_measurement": None,
+    },
+    "4.34": {
+        "name": "Minimal approach to control the pH",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 100,
+        "unit_of_measurement": None,
+    },
+    "4.38": {
+        "name": "pH dosing cycle",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "s",
+    },
+    "4.4": {
+        "name": "pH Alert Min",
+        "device_class": SensorDeviceClass.PH,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 10,
+        "unit_of_measurement": None,
+    },
+    "4.47": {
+        "name": "pH dosing speed",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "%",
+    },
+    "4.5": {
+        "name": "pH dosage control time interval",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "min",
+    },
+    "4.51": {
+        "name": "Polarity reversal times",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "min",
+    },
+    "4.69": {
+        "name": "Hourly counter / Reset every 24h",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "h",
+    },
+    "4.7": {
+        "name": "Minutes counter / Reset every hour",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "min",
+    },
+    "4.82": {
+        "name": "Redox",
+        "device_class": SensorDeviceClass.VOLTAGE,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "mV",
+    },
+    "4.89": {
+        "name": "pH dosing rate",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "%",
+    },
+    "4.91": {
+        "name": "Electrolyzer production rate",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "%",
+    },
+    "4.92": {
+        "name": "Startup delay",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "min",
+    },
+    "4.98": {
+        "name": "Temperature",
+        "device_class": SensorDeviceClass.TEMPERATURE,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 10,
+        "unit_of_measurement": "°C",
+    },
+    "5.3": {
+        "name": "pH production rate",
+        "device_class": None,
+        "state_class": None,
+        "coefficient": 0,
+        "unit_of_measurement": None,
+    },
+    "5.4": {
+        "name": "Redox ON / OFF",
+        "device_class": None,
+        "state_class": None,
+        "coefficient": 0,
+        "unit_of_measurement": None,
+    },
+    "5.41": {
+        "name": "Redox Mode",
+        "device_class": None,
+        "state_class": None,
+        "coefficient": 0,
+        "unit_of_measurement": None,
+    },
+    "5.98": {
+        "name": "Filtration",
+        "device_class": None,
+        "state_class": None,
+        "coefficient": 0,
+        "unit_of_measurement": None,
+    },
+}
