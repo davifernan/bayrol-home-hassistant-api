@@ -172,6 +172,12 @@ class BayrolSensor(SensorEntity):
         self._attr_state_class = sensor_config["state_class"]
         self._attr_native_unit_of_measurement = sensor_config["unit_of_measurement"]
         self._attr_unique_id = f"{config_entry.entry_id}_{sensor_type}"
+        self.entity_id = (
+            "sensor.bayrol_"
+            + config_entry.data[BAYROL_DEVICE_ID]
+            + "_"
+            + sensor_config["name"]
+        )
         if sensor_config["coefficient"] == 1:
             self._attr_suggested_display_precision = 0
         elif sensor_config["coefficient"] == 10:
