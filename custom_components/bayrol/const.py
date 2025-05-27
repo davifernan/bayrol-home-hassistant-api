@@ -6,20 +6,16 @@ from homeassistant.components.sensor import (
 )
 
 DOMAIN = "bayrol"
+
 BAYROL_ACCESS_TOKEN = "bayrol_access_token"
 BAYROL_DEVICE_ID = "bayrol_device_id"
+BAYROL_DEVICE_TYPE = "bayrol_device_type"
 BAYROL_APP_LINK_CODE = "bayrol_app_link_code"
+
 BAYROL_HOST = "www.bayrol-poolaccess.de"
 BAYROL_PORT = 8083
 
-SENSOR_TYPES = {
-    "4.4001": {
-        "name": "pH (PM5)",
-        "device_class": SensorDeviceClass.PH,
-        "state_class": SensorStateClass.MEASUREMENT,
-        "coefficient": 10,
-        "unit_of_measurement": None,
-    },
+SENSOR_TYPES_AS5 = {
     "4.100": {
         "name": "Salt",
         "device_class": None,
@@ -229,5 +225,64 @@ SENSOR_TYPES = {
         "state_class": None,
         "coefficient": 0,
         "unit_of_measurement": None,
+    },
+}
+
+SENSOR_TYPES_PM5 = {
+    "4.4001": {
+        "name": "pH",
+        "device_class": SensorDeviceClass.PH,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 100,
+        "unit_of_measurement": None,
+    },
+    "4.3001": {
+        "name": "pH Target",
+        "device_class": SensorDeviceClass.PH,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 100,
+        "unit_of_measurement": None,
+    },
+    "4.3002": {
+        "name": "pH Alert Min",
+        "device_class": SensorDeviceClass.PH,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 100,
+        "unit_of_measurement": None,
+    },
+    "4.3003": {
+        "name": "pH Alert Max",
+        "device_class": SensorDeviceClass.PH,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 100,
+        "unit_of_measurement": None,
+    },
+    "4.3017": {
+        "name": "Chlorine Target",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 100,
+        "unit_of_measurement": None,
+    },
+    "4.3018": {
+        "name": "Chlorine Alert Min",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 100,
+        "unit_of_measurement": None,
+    },
+    "4.3019": {
+        "name": "Chlorine Alert Max",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 100,
+        "unit_of_measurement": None,
+    },
+    "4.4069": {
+        "name": "Air Temperature",
+        "device_class": SensorDeviceClass.TEMPERATURE,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 100,
+        "unit_of_measurement": "°C",
     },
 }

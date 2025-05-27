@@ -12,7 +12,13 @@ from homeassistant import config_entries
 from homeassistant.const import CONF_TOKEN
 from homeassistant.data_entry_flow import FlowResult
 
-from .const import DOMAIN, BAYROL_ACCESS_TOKEN, BAYROL_DEVICE_ID, BAYROL_APP_LINK_CODE
+from .const import (
+    DOMAIN,
+    BAYROL_ACCESS_TOKEN,
+    BAYROL_DEVICE_ID,
+    BAYROL_APP_LINK_CODE,
+    BAYROL_DEVICE_TYPE,
+)
 
 
 class BayrolConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -44,6 +50,7 @@ class BayrolConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                             data={
                                 BAYROL_ACCESS_TOKEN: access_token,
                                 BAYROL_DEVICE_ID: device_id,
+                                BAYROL_DEVICE_TYPE: user_input[BAYROL_DEVICE_TYPE],
                             },
                         )
 
@@ -54,6 +61,7 @@ class BayrolConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     vol.Required(BAYROL_APP_LINK_CODE): vol.All(
                         str, vol.Length(min=8, max=8)
                     ),
+                    vol.Required(BAYROL_DEVICE_TYPE): vol.In(["AS5", "PM5"]),
                 }
             ),
             errors=errors,

@@ -24,11 +24,13 @@ _LOGGER = logging.getLogger(__name__)
 
 from .const import (
     DOMAIN,
-    SENSOR_TYPES,
+    SENSOR_TYPES_AS5,
+    SENSOR_TYPES_PM5,
     BAYROL_HOST,
     BAYROL_PORT,
     BAYROL_ACCESS_TOKEN,
     BAYROL_DEVICE_ID,
+    BAYROL_DEVICE_TYPE,
 )
 
 BROKER_PASS = "1"
@@ -145,11 +147,21 @@ async def async_setup_entry(
     entities = []
     mqtt_user = config_entry.data[BAYROL_ACCESS_TOKEN]
     _LOGGER.debug("mqtt_user: %s", mqtt_user)
-    for sensor_type, sensor_config in SENSOR_TYPES.items():
-        topic = sensor_type
-        sensor = BayrolSensor(config_entry, sensor_type, sensor_config, topic)
-        sensors[topic] = sensor
-        entities.append(sensor)
+
+    device_type = config_entry.data[BAYROL_DEVICE_TYPE]
+    _LOGGER.debug("device_type: %s", device_type)
+    if device_type == "AS5":
+        for sensor_type, sensor_config in SENSOR_TYPES_AS5.items():
+            topic = sensor_type
+            sensor = BayrolSensor(config_entry, sensor_type, sensor_config, topic)
+            sensors[topic] = sensor
+            entities.append(sensor)
+    elif device_type == "PM5":
+        for sensor_type, sensor_config in SENSOR_TYPES_PM5.items():
+            topic = sensor_type
+            sensor = BayrolSensor(config_entry, sensor_type, sensor_config, topic)
+            sensors[topic] = sensor
+            entities.append(sensor)
 
     mqtt_manager = BayrolMQTTManager(
         hass, sensors, config_entry.data[BAYROL_DEVICE_ID], mqtt_user
