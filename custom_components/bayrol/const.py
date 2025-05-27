@@ -13,6 +13,13 @@ BAYROL_HOST = "www.bayrol-poolaccess.de"
 BAYROL_PORT = 8083
 
 SENSOR_TYPES = {
+    "4.4001": {
+        "name": "pH (PM5)",
+        "device_class": SensorDeviceClass.PH,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 10,
+        "unit_of_measurement": None,
+    },
     "4.100": {
         "name": "Salt",
         "device_class": None,
