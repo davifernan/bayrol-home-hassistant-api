@@ -18,14 +18,31 @@ This custom integration allows you to monitor your Bayrol Pool Access device in 
 
 - Bayrol Automatic Salt 5 (AS5)
 
-
 ## Installation
 
-1. Copy the `bayrol` folder to your `custom_components` directory
+### HACS (Recommended)
+
+1. Make sure you have [HACS](https://hacs.xyz/) installed
+2. Add this repository as a custom repository in HACS:
+   - Click on HACS in the sidebar
+   - Click on "Integrations"
+   - Click the three dots in the top right corner
+   - Select "Custom repositories"
+   - Add `https://github.com/0xQuantumHome/bayrol-home-hassistant`
+   - Select "Integration" as the category
+3. Click "Install"
+4. Restart Home Assistant
+
+### Manual Installation
+
+1. Copy the `custom_components/bayrol_cloud` directory to your Home Assistant's `custom_components` directory
 2. Restart Home Assistant
-3. Go to Settings -> Devices & Services
-4. Click "Add Integration" and search for "Bayrol"
-5. Enter your Bayrol App Link Code (found in the Bayrol Pool Access Web App)
+
+## Configuration
+
+1. Go to Settings -> Devices & Services
+2. Click "Add Integration" and search for "Bayrol"
+3. Enter your Bayrol App Link Code (found in the Bayrol Pool Access Web App)
 
 ## Support
 
