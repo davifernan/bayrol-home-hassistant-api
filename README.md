@@ -14,6 +14,11 @@ This custom integration allows you to monitor your Bayrol Pool Access device in 
 - Monitors 30 pool water quality metrics (including pH, Redox, Salt levels, etc.)
 - Real-time updates via MQTT connection
 
+## Tested Devices
+
+- Bayrol Automatic Salt 5 (AS5)
+
+
 ## Installation
 
 1. Copy the `bayrol` folder to your `custom_components` directory
