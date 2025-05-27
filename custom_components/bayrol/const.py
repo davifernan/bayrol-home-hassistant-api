@@ -184,7 +184,7 @@ SENSOR_TYPES_AS5 = {
         "coefficient": 1,
         "unit_of_measurement": "%",
     },
-    "4.92": {
+    "4.36": {
         "name": "Startup delay",
         "device_class": None,
         "state_class": SensorStateClass.MEASUREMENT,
