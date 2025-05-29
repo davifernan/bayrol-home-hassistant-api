@@ -25,7 +25,7 @@ _LOGGER = logging.getLogger(__name__)
 from .const import (
     DOMAIN,
     SENSOR_TYPES_AS5,
-    SENSOR_TYPES_PM5,
+    SENSOR_TYPES_PM5_CHLORINE,
     BAYROL_HOST,
     BAYROL_PORT,
     BAYROL_ACCESS_TOKEN,
@@ -103,6 +103,24 @@ class BayrolMQTTManager:
                         sensor._attr_native_value = "On"
                     case "19.176":
                         sensor._attr_native_value = "Off"
+                    case "7001":
+                        sensor._attr_native_value = "On"
+                    case "7002":
+                        sensor._attr_native_value = "Off"
+                    case "7521":
+                        sensor._attr_native_value = "Full"
+                    case "7522":
+                        sensor._attr_native_value = "Low"
+                    case "7523":
+                        sensor._attr_native_value = "Empty"
+                    case "7524":
+                        sensor._attr_native_value = "Ok"
+                    case "7525":
+                        sensor._attr_native_value = "Info"
+                    case "7526":
+                        sensor._attr_native_value = "Warning"
+                    case "7527":
+                        sensor._attr_native_value = "Alarm"
                     case _:
                         if sensor._sensor_config["coefficient"] is not None:
                             sensor._attr_native_value = (
@@ -156,8 +174,8 @@ async def async_setup_entry(
             sensor = BayrolSensor(config_entry, sensor_type, sensor_config, topic)
             sensors[topic] = sensor
             entities.append(sensor)
-    elif device_type == "PM5":
-        for sensor_type, sensor_config in SENSOR_TYPES_PM5.items():
+    elif device_type == "PM5 Chlorine":
+        for sensor_type, sensor_config in SENSOR_TYPES_PM5_CHLORINE.items():
             topic = sensor_type
             sensor = BayrolSensor(config_entry, sensor_type, sensor_config, topic)
             sensors[topic] = sensor
