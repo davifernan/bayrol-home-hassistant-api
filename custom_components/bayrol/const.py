@@ -299,6 +299,27 @@ SENSOR_TYPES_PM5_CHLORINE = {
         "coefficient": 10,
         "unit_of_measurement": "°C",
     },
+    "4.4132": {
+        "name": "Active Alarms",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": None,
+    },
+    "5.6012": {
+        "name": "pH Pump",
+        "device_class": None,
+        "state_class": None,
+        "coefficient": 0,
+        "unit_of_measurement": None,
+    },
+    "5.6015": {
+        "name": "Redox Pump Status",
+        "device_class": None,
+        "state_class": None,
+        "coefficient": 0,
+        "unit_of_measurement": None,
+    },
     "5.6064": {
         "name": "pH Canister Level",
         "device_class": None,
@@ -313,11 +334,20 @@ SENSOR_TYPES_PM5_CHLORINE = {
         "coefficient": 0,
         "unit_of_measurement": None,
     },
-    "5.6012": {
-        "name": "pH Pump",
+    "5.6068": {
+        "name": "Redox Canister Level",
         "device_class": None,
         "state_class": None,
         "coefficient": 0,
         "unit_of_measurement": None,
     },
+    "5.6069": {
+        "name": "Redox Status",
+        "device_class": None,
+        "state_class": None,
+        "coefficient": 0,
+        "unit_of_measurement": None,
+    },
+    
+
 }
