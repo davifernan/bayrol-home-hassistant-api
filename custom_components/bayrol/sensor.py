@@ -103,23 +103,23 @@ class BayrolMQTTManager:
                         sensor._attr_native_value = "On"
                     case "19.176":
                         sensor._attr_native_value = "Off"
-                    case "7001":
+                    case 7001:
                         sensor._attr_native_value = "On"
-                    case "7002":
+                    case 7002:
                         sensor._attr_native_value = "Off"
-                    case "7521":
+                    case 7521:
                         sensor._attr_native_value = "Full"
-                    case "7522":
+                    case 7522:
                         sensor._attr_native_value = "Low"
-                    case "7523":
+                    case 7523:
                         sensor._attr_native_value = "Empty"
-                    case "7524":
+                    case 7524:
                         sensor._attr_native_value = "Ok"
-                    case "7525":
+                    case 7525:
                         sensor._attr_native_value = "Info"
-                    case "7526":
+                    case 7526:
                         sensor._attr_native_value = "Warning"
-                    case "7527":
+                    case 7527:
                         sensor._attr_native_value = "Alarm"
                     case _:
                         if sensor._sensor_config["coefficient"] is not None:
