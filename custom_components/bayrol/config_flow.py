@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import aiohttp
 import json
 from typing import Any
 
@@ -9,15 +10,14 @@ import aiohttp
 import voluptuous as vol
 
 from homeassistant import config_entries
-from homeassistant.const import CONF_TOKEN
 from homeassistant.data_entry_flow import FlowResult
 
 from .const import (
-    DOMAIN,
     BAYROL_ACCESS_TOKEN,
-    BAYROL_DEVICE_ID,
     BAYROL_APP_LINK_CODE,
+    BAYROL_DEVICE_ID,
     BAYROL_DEVICE_TYPE,
+    DOMAIN,
 )
 
 

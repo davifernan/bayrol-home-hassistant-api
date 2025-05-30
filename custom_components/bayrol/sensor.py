@@ -5,7 +5,6 @@ from __future__ import annotations
 import logging
 import threading
 import paho.mqtt.client as paho
-from typing import Any
 import json
 
 from homeassistant.components.sensor import (
@@ -16,11 +15,6 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.device_registry import DeviceInfo
-
-
-from .const import DOMAIN
-
-_LOGGER = logging.getLogger(__name__)
 
 from .const import (
     DOMAIN,
@@ -33,12 +27,17 @@ from .const import (
     BAYROL_DEVICE_TYPE,
 )
 
+_LOGGER = logging.getLogger(__name__)
+
 BROKER_PASS = "1"
 MQTT_TOPIC_PREFIX = None
 
 
 class BayrolMQTTManager:
+    """Manage the Bayrol MQTT connection."""
+
     def __init__(self, hass, sensors, device_id, mqtt_user):
+        """Initialize the Bayrol MQTT manager."""
         self.hass = hass
         self.sensors = sensors
         self.mqtt_user = mqtt_user
@@ -47,6 +46,7 @@ class BayrolMQTTManager:
         self.thread = None
 
     def _on_connect(self, client, userdata, flags, rc):
+        """Handle the connection to the MQTT broker."""
         if rc == 0:
             _LOGGER.info("Connected to Bayrol MQTT broker with result code 0 (Success)")
         else:
@@ -58,6 +58,7 @@ class BayrolMQTTManager:
             client.publish("d02/" + self.device_id + "/g/" + topic)
 
     def _on_message(self, client, userdata, msg):
+        """Handle the incoming messages from the MQTT broker."""
         _LOGGER.debug("Received message from topic: %s", msg.topic)
 
         # Just get the last part of the topic
@@ -142,6 +143,7 @@ class BayrolMQTTManager:
             _LOGGER.warning("Received message for unknown topic: %s", msg.topic)
 
     def _start(self):
+        """Start the MQTT manager."""
         self.client = paho.Client(transport="websockets")
         self.client.username_pw_set(self.mqtt_user, BROKER_PASS)
         self.client.tls_set()
@@ -155,6 +157,7 @@ class BayrolMQTTManager:
         self.client.loop_forever()
 
     def start(self):
+        """Start the MQTT manager."""
         _LOGGER.debug("Starting MQTT manager")
         if not self.thread:
             self.thread = threading.Thread(target=self._start, daemon=True)
@@ -166,6 +169,7 @@ async def async_setup_entry(
     config_entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
+    """Set up the Bayrol sensor."""
     sensors = {}
     entities = []
     mqtt_user = config_entry.data[BAYROL_ACCESS_TOKEN]
@@ -223,13 +227,16 @@ class BayrolSensor(SensorEntity):
         self._mqtt_manager = None
 
     def set_mqtt_manager(self, manager):
+        """Set the MQTT manager."""
         self._mqtt_manager = manager
 
     async def async_added_to_hass(self) -> None:
+        """Run when entity is added to Home Assistant."""
         pass
 
     @property
     def device_info(self) -> DeviceInfo:
+        """Device info."""
         return DeviceInfo(
             identifiers={(DOMAIN, self._config_entry.data[BAYROL_DEVICE_ID])},
             manufacturer="Bayrol",
