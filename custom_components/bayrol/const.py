@@ -107,6 +107,20 @@ SENSOR_TYPES_AS5 = {
         "coefficient": 1,
         "unit_of_measurement": "min",
     },
+    "4.67": {
+        "name": "SW Version",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 100,
+        "unit_of_measurement": None,
+    },
+    "4.68": {
+        "name": "SW Date",
+        "device_class": None,
+        "state_class": None,
+        "coefficient": -1,  # Treat result as string
+        "unit_of_measurement": None,
+    },
     "4.69": {
         "name": "Hourly counter / Reset every 24h",
         "device_class": None,
@@ -237,7 +251,7 @@ SENSOR_TYPES_PM5_CHLORINE = {
         "unit_of_measurement": None,
     },
     "4.3002": {
-        "name": "pH Alert Min", 
+        "name": "pH Alert Min",
         "device_class": SensorDeviceClass.PH,
         "state_class": SensorStateClass.MEASUREMENT,
         "coefficient": 100,
@@ -348,6 +362,4 @@ SENSOR_TYPES_PM5_CHLORINE = {
         "coefficient": None,
         "unit_of_measurement": None,
     },
-    
-
 }

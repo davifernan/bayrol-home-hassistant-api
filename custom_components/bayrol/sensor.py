@@ -122,10 +122,15 @@ class BayrolMQTTManager:
                     case 7527:
                         sensor._attr_native_value = "Alarm"
                     case _:
-                        if sensor._sensor_config["coefficient"] is not None:
+                        if (
+                            sensor._sensor_config["coefficient"] is not None
+                            and sensor._sensor_config["coefficient"] != -1
+                        ):
                             sensor._attr_native_value = (
                                 value / sensor._sensor_config["coefficient"]
                             )
+                        elif sensor._sensor_config["coefficient"] == -1:
+                            sensor._attr_native_value = str(value)
                         else:
                             sensor._attr_native_value = value
 
