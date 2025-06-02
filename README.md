@@ -22,15 +22,8 @@ This custom integration allows you to monitor your Bayrol Pool Access device in 
 ### HACS (Recommended)
 
 1. Make sure you have [HACS](https://hacs.xyz/) installed
-2. Add this repository as a custom repository in HACS:
-   - Click on HACS in the sidebar
-   - Click on "Integrations"
-   - Click the three dots in the top right corner
-   - Select "Custom repositories"
-   - Add `https://github.com/0xQuantumHome/bayrol-home-hassistant`
-   - Select "Integration" as the category
-3. Click "Install"
-4. Restart Home Assistant
+2. Search for "Bayrol" and install the integration
+3. Restart Home Assistant
 
 ### Manual Installation
 
