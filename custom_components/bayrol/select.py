@@ -19,6 +19,8 @@ from .const import (
     BAYROL_DEVICE_TYPE,
     VALUE_TO_MQTT_AS5,
     MQTT_TO_VALUE_AS5,
+    VALUE_TO_MQTT_PM5,
+    MQTT_TO_VALUE_PM5,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -26,8 +28,11 @@ _LOGGER = logging.getLogger(__name__)
 
 def _handle_select_value(select, value):
     """Handle incoming select value."""
+
     if value in MQTT_TO_VALUE_AS5:
         select._attr_current_option = MQTT_TO_VALUE_AS5[value]
+    elif value in MQTT_TO_VALUE_PM5:
+        select._attr_current_option = MQTT_TO_VALUE_PM5[value]
     else:
         # Try to find the value in the custom mappings
         for mqtt_value, display_value in select._mqtt_to_value.items():
@@ -127,7 +132,11 @@ class BayrolSelect(SelectEntity):
             return
 
         # First try standard mapping
-        mqtt_value = VALUE_TO_MQTT_AS5.get(option)
+        if self._config_entry.data[BAYROL_DEVICE_TYPE] == "PM5 Chlorine":
+            mqtt_value = VALUE_TO_MQTT_PM5.get(option)
+        else:
+            mqtt_value = VALUE_TO_MQTT_AS5.get(option)
+
         if mqtt_value is None:
             # Then try custom mapping
             mqtt_value = self._select_config.get("mqtt_values", {}).get(option)
