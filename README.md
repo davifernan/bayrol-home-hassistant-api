@@ -15,6 +15,7 @@ This custom integration allows you to monitor your Bayrol Pool Access device in 
 ## Tested Devices
 
 - Bayrol Automatic Salt 5 (AS5)
+- Bayrol Automatic Cl-pH
 - Pool Manager 5 Chlorine
 
 ## Installation
