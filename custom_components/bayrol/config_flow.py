@@ -61,7 +61,9 @@ class BayrolConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     vol.Required(BAYROL_APP_LINK_CODE): vol.All(
                         str, vol.Length(min=8, max=8)
                     ),
-                    vol.Required(BAYROL_DEVICE_TYPE): vol.In(["AS5", "PM5 Chlorine"]),
+                    vol.Required(BAYROL_DEVICE_TYPE): vol.In(
+                        ["Automatic SALT", "Automatic Cl-pH", "PM5 Chlorine"]
+                    ),
                 }
             ),
             errors=errors,

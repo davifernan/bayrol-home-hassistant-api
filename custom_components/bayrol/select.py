@@ -13,12 +13,13 @@ from homeassistant.helpers.device_registry import DeviceInfo
 
 from .const import (
     DOMAIN,
-    SENSOR_TYPES_AS5,
+    SENSOR_TYPES_AUTOMATIC_SALT,
+    SENSOR_TYPES_AUTOMATIC_CL_PH,
     SENSOR_TYPES_PM5_CHLORINE,
     BAYROL_DEVICE_ID,
     BAYROL_DEVICE_TYPE,
-    VALUE_TO_MQTT_AS5,
-    MQTT_TO_VALUE_AS5,
+    VALUE_TO_MQTT_AUTOMATIC,
+    MQTT_TO_VALUE_AUTOMATIC,
     VALUE_TO_MQTT_PM5,
     MQTT_TO_VALUE_PM5,
 )
@@ -28,11 +29,10 @@ _LOGGER = logging.getLogger(__name__)
 
 def _handle_select_value(select, value):
     """Handle incoming select value."""
-
-    if value in MQTT_TO_VALUE_AS5:
-        select._attr_current_option = MQTT_TO_VALUE_AS5[value]
-    elif value in MQTT_TO_VALUE_PM5:
+    if value in MQTT_TO_VALUE_PM5:
         select._attr_current_option = MQTT_TO_VALUE_PM5[value]
+    elif value in MQTT_TO_VALUE_AUTOMATIC:
+        select._attr_current_option = MQTT_TO_VALUE_AUTOMATIC[value]
     else:
         # Try to find the value in the custom mappings
         for mqtt_value, display_value in select._mqtt_to_value.items():
@@ -76,8 +76,17 @@ async def async_setup_entry(
     # Get the shared MQTT manager
     mqtt_manager = hass.data[DOMAIN]["mqtt_manager"]
 
-    if device_type == "AS5":
-        for select_type, select_config in SENSOR_TYPES_AS5.items():
+    if device_type == "Automatic SALT":
+        for select_type, select_config in SENSOR_TYPES_AUTOMATIC_SALT.items():
+            if select_config.get("entity_type") == "select":
+                topic = select_type
+                select = BayrolSelect(config_entry, select_type, select_config, topic)
+                mqtt_manager.subscribe(
+                    topic, lambda v, s=select: _handle_select_value(s, v)
+                )
+                entities.append(select)
+    elif device_type == "Automatic Cl-pH":
+        for select_type, select_config in SENSOR_TYPES_AUTOMATIC_CL_PH.items():
             if select_config.get("entity_type") == "select":
                 topic = select_type
                 select = BayrolSelect(config_entry, select_type, select_config, topic)
@@ -134,8 +143,11 @@ class BayrolSelect(SelectEntity):
         # First try standard mapping
         if self._config_entry.data[BAYROL_DEVICE_TYPE] == "PM5 Chlorine":
             mqtt_value = VALUE_TO_MQTT_PM5.get(option)
-        else:
-            mqtt_value = VALUE_TO_MQTT_AS5.get(option)
+        elif (
+            self._config_entry.data[BAYROL_DEVICE_TYPE] == "Automatic Cl-pH"
+            or self._config_entry.data[BAYROL_DEVICE_TYPE] == "Automatic SALT"
+        ):
+            mqtt_value = VALUE_TO_MQTT_AUTOMATIC.get(option)
 
         if mqtt_value is None:
             # Then try custom mapping

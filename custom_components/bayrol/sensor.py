@@ -14,7 +14,8 @@ from homeassistant.helpers.device_registry import DeviceInfo
 
 from .const import (
     DOMAIN,
-    SENSOR_TYPES_AS5,
+    SENSOR_TYPES_AUTOMATIC_SALT,
+    SENSOR_TYPES_AUTOMATIC_CL_PH,
     SENSOR_TYPES_PM5_CHLORINE,
     BAYROL_DEVICE_ID,
     BAYROL_DEVICE_TYPE,
@@ -40,6 +41,12 @@ def _handle_sensor_value(sensor, value):
             sensor._attr_native_value = "On"
         case "19.176":
             sensor._attr_native_value = "Off"
+        case "19.257":
+            sensor._attr_native_value = "Missing"
+        case "19.258":
+            sensor._attr_native_value = "Not Empty"
+        case "19.259":
+            sensor._attr_native_value = "Empty"
         case 7001:
             sensor._attr_native_value = "On"
         case 7002:
@@ -86,8 +93,17 @@ async def async_setup_entry(
     # Get the shared MQTT manager
     mqtt_manager = hass.data[DOMAIN]["mqtt_manager"]
 
-    if device_type == "AS5":
-        for sensor_type, sensor_config in SENSOR_TYPES_AS5.items():
+    if device_type == "Automatic SALT":
+        for sensor_type, sensor_config in SENSOR_TYPES_AUTOMATIC_SALT.items():
+            if sensor_config.get("entity_type") != "select":  # Skip select entities
+                topic = sensor_type
+                sensor = BayrolSensor(config_entry, sensor_type, sensor_config, topic)
+                mqtt_manager.subscribe(
+                    topic, lambda v, s=sensor: _handle_sensor_value(s, v)
+                )
+                entities.append(sensor)
+    elif device_type == "Automatic Cl-pH":
+        for sensor_type, sensor_config in SENSOR_TYPES_AUTOMATIC_CL_PH.items():
             if sensor_config.get("entity_type") != "select":  # Skip select entities
                 topic = sensor_type
                 sensor = BayrolSensor(config_entry, sensor_type, sensor_config, topic)

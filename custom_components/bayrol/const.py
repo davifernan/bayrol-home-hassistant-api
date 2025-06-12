@@ -16,7 +16,7 @@ BAYROL_HOST = "www.bayrol-poolaccess.de"
 BAYROL_PORT = 8083
 
 # MQTT value mappings for AS5 device
-VALUE_TO_MQTT_AS5 = {
+VALUE_TO_MQTT_AUTOMATIC = {
     "0.25x": "19.3",
     "0.5x": "19.4",
     "0.75x": "19.5",
@@ -29,13 +29,15 @@ VALUE_TO_MQTT_AS5 = {
     "10x": "19.12",
     "On": "19.17",
     "Off": "19.18",
-    "Auto": "19.195",
-    "Auto Plus": "19.115",
     "Constant production": "19.106",
+    "Auto Plus": "19.115",
+    "Auto": "19.195",
+    "Full": "19.258",
+    "Empty": "19.259",
 }
 
 # Reverse mapping for MQTT values to display values
-MQTT_TO_VALUE_AS5 = {v: k for k, v in VALUE_TO_MQTT_AS5.items()}
+MQTT_TO_VALUE_AUTOMATIC = {v: k for k, v in VALUE_TO_MQTT_AUTOMATIC.items()}
 
 VALUE_TO_MQTT_PM5 = {
     "On": "7408",
@@ -46,7 +48,8 @@ VALUE_TO_MQTT_PM5 = {
 # Reverse mapping for MQTT values to display values
 MQTT_TO_VALUE_PM5 = {v: k for k, v in VALUE_TO_MQTT_PM5.items()}
 
-SENSOR_TYPES_AS5 = {
+# Common sensor types for Automatic devices
+SENSOR_TYPES_AUTOMATIC = {
     "4.2": {
         "name": "pH Target",
         "device_class": SensorDeviceClass.PH,
@@ -131,7 +134,7 @@ SENSOR_TYPES_AS5 = {
         ],
     },
     "4.5": {
-        "name": "pH dosage control time interval",
+        "name": "pH Dosing Control Time Interval",
         "device_class": None,
         "state_class": SensorStateClass.MEASUREMENT,
         "coefficient": 1,
@@ -139,7 +142,7 @@ SENSOR_TYPES_AS5 = {
         "entity_type": "sensor",
     },
     "4.7": {
-        "name": "Minutes counter / Reset every hour",
+        "name": "Minutes Counter / Reset every hour",
         "device_class": None,
         "state_class": SensorStateClass.MEASUREMENT,
         "coefficient": 1,
@@ -519,7 +522,7 @@ SENSOR_TYPES_AS5 = {
         ],
     },
     "4.34": {
-        "name": "Minimal approach to control the pH",
+        "name": "Minimal Approach to Control the pH",
         "device_class": None,
         "state_class": SensorStateClass.MEASUREMENT,
         "coefficient": 100,
@@ -597,7 +600,7 @@ SENSOR_TYPES_AS5 = {
         ],
     },
     "4.38": {
-        "name": "pH dosing cycle",
+        "name": "pH Dosing Cycle",
         "device_class": None,
         "state_class": SensorStateClass.MEASUREMENT,
         "coefficient": 1,
@@ -605,7 +608,7 @@ SENSOR_TYPES_AS5 = {
         "entity_type": "sensor",
     },
     "4.47": {
-        "name": "pH dosing speed",
+        "name": "pH Dosing Speed",
         "device_class": None,
         "state_class": SensorStateClass.MEASUREMENT,
         "coefficient": 1,
@@ -613,7 +616,7 @@ SENSOR_TYPES_AS5 = {
         "entity_type": "sensor",
     },
     "4.51": {
-        "name": "Polarity reversal times",
+        "name": "Polarity Reversal Times",
         "device_class": None,
         "state_class": SensorStateClass.MEASUREMENT,
         "coefficient": 1,
@@ -665,7 +668,7 @@ SENSOR_TYPES_AS5 = {
         "entity_type": "sensor",
     },
     "4.69": {
-        "name": "Hourly counter / Reset every 24h",
+        "name": "Hourly Counter / Reset every 24h",
         "device_class": None,
         "state_class": SensorStateClass.MEASUREMENT,
         "coefficient": 1,
@@ -681,7 +684,7 @@ SENSOR_TYPES_AS5 = {
         "entity_type": "sensor",
     },
     "4.89": {
-        "name": "pH dosing rate",
+        "name": "pH Dosing Rate",
         "device_class": None,
         "state_class": SensorStateClass.MEASUREMENT,
         "coefficient": 1,
@@ -689,7 +692,7 @@ SENSOR_TYPES_AS5 = {
         "entity_type": "sensor",
     },
     "4.91": {
-        "name": "Electrolyzer production rate",
+        "name": "Electrolyzer Production Rate",
         "device_class": None,
         "state_class": SensorStateClass.MEASUREMENT,
         "coefficient": 1,
@@ -704,14 +707,6 @@ SENSOR_TYPES_AS5 = {
         "unit_of_measurement": "°C",
         "entity_type": "sensor",
     },
-    "4.100": {
-        "name": "Salt",
-        "device_class": None,
-        "state_class": SensorStateClass.MEASUREMENT,
-        "coefficient": 10,
-        "unit_of_measurement": "g/l",
-        "entity_type": "sensor",
-    },
     "4.102": {
         "name": "Conductivity",
         "device_class": None,
@@ -721,7 +716,7 @@ SENSOR_TYPES_AS5 = {
         "entity_type": "sensor",
     },
     "4.104": {
-        "name": "Electrolyzer voltage",
+        "name": "Electrolyzer Voltage",
         "device_class": SensorDeviceClass.VOLTAGE,
         "state_class": SensorStateClass.MEASUREMENT,
         "coefficient": 10,
@@ -729,7 +724,7 @@ SENSOR_TYPES_AS5 = {
         "entity_type": "sensor",
     },
     "4.105": {
-        "name": "Electrolyzer current",
+        "name": "Electrolyzer Current",
         "device_class": SensorDeviceClass.CURRENT,
         "state_class": SensorStateClass.MEASUREMENT,
         "coefficient": 10,
@@ -737,7 +732,7 @@ SENSOR_TYPES_AS5 = {
         "entity_type": "sensor",
     },
     "4.107": {
-        "name": "Battery voltage",
+        "name": "Battery Voltage",
         "device_class": SensorDeviceClass.VOLTAGE,
         "state_class": SensorStateClass.MEASUREMENT,
         "coefficient": 100,
@@ -745,7 +740,7 @@ SENSOR_TYPES_AS5 = {
         "entity_type": "sensor",
     },
     "4.112": {
-        "name": "Time before next polarity reversal",
+        "name": "Time Before Next Polarity Reversal",
         "device_class": None,
         "state_class": SensorStateClass.MEASUREMENT,
         "coefficient": 1,
@@ -753,7 +748,7 @@ SENSOR_TYPES_AS5 = {
         "entity_type": "sensor",
     },
     "4.119": {
-        "name": "Time since polarity reversal",
+        "name": "Time Since Polarity Reversal",
         "device_class": None,
         "state_class": SensorStateClass.MEASUREMENT,
         "coefficient": 1,
@@ -820,7 +815,7 @@ SENSOR_TYPES_AS5 = {
         "entity_type": "sensor",
     },
     "5.3": {
-        "name": "pH production rate",
+        "name": "pH Production Rate",
         "device_class": None,
         "state_class": None,
         "coefficient": None,
@@ -874,6 +869,49 @@ SENSOR_TYPES_AS5 = {
     },
 }
 
+# Additional sensor types for Automatic SALT
+SENSOR_TYPES_AUTOMATIC_SALT = {
+    **SENSOR_TYPES_AUTOMATIC,  # Include all base sensors
+    "4.100": {
+        "name": "Salt",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 10,
+        "unit_of_measurement": "g/l",
+        "entity_type": "sensor",
+    },
+}
+
+# Additional sensor types for Automatic Cl-pH
+SENSOR_TYPES_AUTOMATIC_CL_PH = {
+    **SENSOR_TYPES_AUTOMATIC,  # Include all base sensors
+    "4.209": {
+        "name": "Cl Dosing Speed",
+        "device_class": None,
+        "state_class": SensorStateClass.MEASUREMENT,
+        "coefficient": 1,
+        "unit_of_measurement": "%",
+        "entity_type": "sensor",
+    },
+    "5.80": {
+        "name": "pH Minus Canister Status",
+        "device_class": None,
+        "state_class": None,
+        "coefficient": None,
+        "unit_of_measurement": None,
+        "entity_type": "sensor",
+    },
+    "5.169": {
+        "name": "Cl Canister Status",
+        "device_class": None,
+        "state_class": None,
+        "coefficient": None,
+        "unit_of_measurement": None,
+        "entity_type": "sensor",
+    },
+}
+
+# Sensor types for PM5 Chlorine
 SENSOR_TYPES_PM5_CHLORINE = {
     "4.3001": {
         "name": "pH Target",
