@@ -885,7 +885,7 @@ SENSOR_TYPES_AUTOMATIC_SALT = {
 # Additional sensor types for Automatic Cl-pH
 SENSOR_TYPES_AUTOMATIC_CL_PH = {
     **SENSOR_TYPES_AUTOMATIC,  # Include all base sensors
-    "4.89": {
+    "4.90": {
         "name": "Cl Dosing Rate",
         "device_class": None,
         "state_class": SensorStateClass.MEASUREMENT,
