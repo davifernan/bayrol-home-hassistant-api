@@ -901,7 +901,7 @@ SENSOR_TYPES_AUTOMATIC_CL_PH = {
         "unit_of_measurement": "%",
         "entity_type": "sensor",
     },
-    "5.3": {
+    "5.175": {
         "name": "Cl Adjust Dosing Amount",
         "device_class": None,
         "state_class": SensorStateClass.MEASUREMENT,
